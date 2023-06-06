@@ -1,19 +1,40 @@
 package org.example;
+import MiniProject.Employee;
+import MiniProject.EmployeeCsvReader;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Iterator;
 
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+import static java.lang.Integer.parseInt;
+
 public class Main {
-    public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome5!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+    public static void main(String[] args) throws IOException {
+        FileInputStream fis = new FileInputStream("src/main/resources/Employees_short.xlsx");
+        XSSFWorkbook workbook = new XSSFWorkbook(fis);
+        XSSFSheet sheet = workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = sheet.iterator();
+        while (rowIterator.hasNext()) {
+            Row row = rowIterator.next();
+            Iterator<Cell> cellIterator = row.cellIterator();
+            String str = "";
+            while (cellIterator.hasNext()) {
+                Cell cell = cellIterator.next();
+                switch (cell.getCellType()) {
+                    case Cell.CELL_TYPE_NUMERIC:
+                        String employeeID= cell.getNumericCellValue() + "";
+                        str+=employeeID.substring(0,employeeID.length()-2)+",";
+                        break;
+                    case Cell.CELL_TYPE_STRING:
+                        str+=cell.getStringCellValue()+",";
+                        break;
+                }
+            }
+            EmployeeCsvReader newEmployee = new EmployeeCsvReader();
+            newEmployee.createEmployee(str.substring(0,str.length()-1));
         }
     }
 }
