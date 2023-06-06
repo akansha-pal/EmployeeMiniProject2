@@ -16,4 +16,28 @@ public class Employee {
         this.gender = gender;
         this.hire_date = hire_date;
     }
+
+    public String getEmp_no() {
+        return emp_no;
+    }
+
+    public String getBirth_date() {
+        return birth_date;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public String getHire_date() {
+        return hire_date;
+    }
 }
