@@ -3,9 +3,6 @@ import MiniProject.EmployeeCsvReader;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.ParameterizedTest;
-
-import javax.annotation.processing.SupportedAnnotationTypes;
 
 public class EmployeeTest {
 
@@ -16,18 +13,27 @@ public class EmployeeTest {
         var file = EmployeeCsvReader.readFileLines("src/main/resources/Employees_short.csv");
         Employee employee = EmployeeCsvReader.createEmployee(file.get(0));
         Assertions.assertEquals("37682",employee.getEmp_no());
-        Assertions.assertEquals("28/01/1962",employee.getBirth_date());
+        //Assertions.assertEquals("28/01/1962",employee.getBirth_date());
+
+        // LocalDate birth_Date
+        Assertions.assertEquals("1962-01-28",employee.getBirth_date().toString());
         Assertions.assertEquals("Sigeru",employee.getFirst_name());
         Assertions.assertEquals("Akiyama",employee.getLast_name());
-        Assertions.assertEquals("F",employee.getGender());
-        Assertions.assertEquals("17/09/1990",employee.getHire_date());
+       // Assertions.assertEquals("F",employee.getGender());
+
+        // char gender
+        Assertions.assertEquals('F',employee.getGender());
+        //Assertions.assertEquals("17/09/1990",employee.getHire_date());
+
+        // LocalDate hire_date
+        Assertions.assertEquals("1990-09-17",employee.getHire_date().toString());
     }
 
     @Test
     @DisplayName("Test for readFileLines - length of list should be 10")
     public void test3(){
         var file = EmployeeCsvReader.readFileLines("src/main/resources/Employees_short.csv");
-        Assertions.assertEquals(10,file.toArray().length);
+        Assertions.assertEquals(10,file.size());
     }
     @Test
     @DisplayName("Test for readFileLines - first string should be correct")
@@ -56,22 +62,49 @@ public class EmployeeTest {
     public void test7(){
         var employeeList = EmployeeCsvReader.readEmployees("src/main/resources/Employees_short.csv");
         Assertions.assertEquals("37682",employeeList.get(0).getEmp_no());
-        Assertions.assertEquals("28/01/1962",employeeList.get(0).getBirth_date());
+        //Assertions.assertEquals("28/01/1962",employeeList.get(0).getBirth_date());
+
+        // LocalDate birth_Date
+        Assertions.assertEquals("1962-01-28",employeeList.get(0).getBirth_date().toString());
         Assertions.assertEquals("Sigeru",employeeList.get(0).getFirst_name());
         Assertions.assertEquals("Akiyama",employeeList.get(0).getLast_name());
-        Assertions.assertEquals("F",employeeList.get(0).getGender());
-        Assertions.assertEquals("17/09/1990",employeeList.get(0).getHire_date());
+       // Assertions.assertEquals("F",employeeList.get(0).getGender());
+
+        // char gender
+        Assertions.assertEquals('F',employeeList.get(0).getGender());
+       // Assertions.assertEquals("17/09/1990",employeeList.get(0).getHire_date());
+
+        // LocalDate hire_Date
+        Assertions.assertEquals("1990-09-17",employeeList.get(0).getHire_date().toString());
     }
+
     @Test
     @DisplayName("Test for readingEmployees - last object should be correct")
     public void test8(){
         var employeeList = EmployeeCsvReader.readEmployees("src/main/resources/Employees_short.csv");
         Assertions.assertEquals("38882",employeeList.get(9).getEmp_no());
-        Assertions.assertEquals("21/01/1962",employeeList.get(9).getBirth_date());
+       // Assertions.assertEquals("21/01/1962",employeeList.get(9).getBirth_date());
+
+        // LocalDate birth_Date
+        Assertions.assertEquals("1962-01-21",employeeList.get(9).getBirth_date().toString());
         Assertions.assertEquals("Aemilian",employeeList.get(9).getFirst_name());
         Assertions.assertEquals("Gimarc",employeeList.get(9).getLast_name());
-        Assertions.assertEquals("F",employeeList.get(9).getGender());
-        Assertions.assertEquals("08/11/1986",employeeList.get(9).getHire_date());
+        //Assertions.assertEquals("F",employeeList.get(9).getGender());
+
+        // char gender
+        Assertions.assertEquals('F',employeeList.get(9).getGender());
+       // Assertions.assertEquals("08/11/1986",employeeList.get(9).getHire_date());
+
+        // LocalDate hire_Date
+        Assertions.assertEquals("1986-11-08",employeeList.get(9).getHire_date().toString());
     }
+    @Test
+    @DisplayName("Test for readingEmployees - length of employee number should be less than or equal to 8")
+    public void test9(){
+        var employeeList = EmployeeCsvReader.readEmployees("src/main/resources/Employees_short.csv");
+        Assertions.assertEquals(5,employeeList.get(2).getEmp_no().length());
+
+    }
+
 
 }
