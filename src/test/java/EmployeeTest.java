@@ -113,7 +113,7 @@ public class EmployeeTest {
     }
 
     @Test
-    @DisplayName("Test for readingEmployees - length of employee number should be less than or equal to 8")
+    @DisplayName("Test for readfilelines and log any validation error")
     public void test10() {
         Logger logger = LogManager.getLogger("My Sparta App for Employees");
         var employeeList = EmployeeCsvReader.readFileLines("src/main/resources/Employees_short.csv");
